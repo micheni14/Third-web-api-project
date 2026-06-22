@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #09090b;
+    --foreground: #fafafa;
+    --accent: #a855f7;
+    --accent-dim: #7c3aed;
+    --card: #141416;
+    --card-hover: #1a1a1d;
+    --border: #27272a;
+    --border-light: #3f3f46;
+    --muted: #a1a1aa;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+  }
+
+  body {
+    @apply antialiased;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--border-light);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-[var(--accent)] to-blue-500 bg-clip-text text-transparent;
+  }
+
+  .card {
+    @apply rounded-xl border border-[var(--border)] bg-[var(--card)] transition-all duration-200;
+  }
+
+  .card:hover {
+    @apply border-[var(--border-light)] bg-[var(--card-hover)];
+  }
+
+  .card-highlight {
+    @apply card;
+    box-shadow: 0 0 0 1px var(--accent), 0 0 20px -8px var(--accent);
+  }
+
+  .input-field {
+    @apply w-full rounded-lg border border-[var(--border)] bg-[var(--background)] px-4 py-2.5 text-sm text-[var(--foreground)] placeholder-zinc-500 outline-none transition-all duration-200;
+  }
+
+  .input-field:focus {
+    @apply border-[var(--accent)];
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-white transition-all duration-200;
+    background: linear-gradient(135deg, var(--accent), var(--accent-dim));
+  }
+
+  .btn-primary:hover {
+    @apply opacity-90;
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:disabled {
+    @apply cursor-not-allowed opacity-50;
+    transform: none;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--card)] px-4 py-2.5 text-sm font-medium text-zinc-300 transition-all duration-200;
+  }
+
+  .btn-secondary:hover {
+    @apply border-[var(--border-light)] text-[var(--foreground)];
+  }
+}
