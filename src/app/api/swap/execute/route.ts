@@ -1,15 +1,14 @@
 import { NextRequest } from "next/server";
-import { createThirdwebClient } from "thirdweb";
 import { base } from "thirdweb/chains";
 
 export const runtime = "edge";
 
-const client = createThirdwebClient({
-  secretKey: process.env.THIRDWEB_SECRET_KEY!,
-});
-
 export async function POST(req: NextRequest) {
   try {
+    if (!process.env.THIRDWEB_SECRET_KEY) {
+      return Response.json({ error: "Secret key not configured" }, { status: 500 });
+    }
+
     const { quote, fromAddress } = await req.json();
 
     if (!quote?.txData) {
