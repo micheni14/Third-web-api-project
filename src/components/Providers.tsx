@@ -3,13 +3,14 @@
 import { createThirdwebClient, type ThirdwebClient } from "thirdweb";
 import { ThirdwebProvider } from "thirdweb/react";
 
-let _client: ThirdwebClient;
+let _client: ThirdwebClient | undefined;
 
 export function getClient(): ThirdwebClient {
   if (!_client) {
-    _client = createThirdwebClient({
-      clientId: process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID!,
-    });
+    const clientId = process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID;
+    _client = clientId
+      ? createThirdwebClient({ clientId })
+      : ({ clientId: "" } as ThirdwebClient);
   }
   return _client;
 }
