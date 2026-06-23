@@ -1,12 +1,18 @@
 "use client";
 
-import { createThirdwebClient } from "thirdweb";
+import { createThirdwebClient, type ThirdwebClient } from "thirdweb";
 import { ThirdwebProvider } from "thirdweb/react";
-import { base } from "thirdweb/chains";
 
-const client = createThirdwebClient({
-  clientId: process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID!,
-});
+let _client: ThirdwebClient;
+
+export function getClient(): ThirdwebClient {
+  if (!_client) {
+    _client = createThirdwebClient({
+      clientId: process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID!,
+    });
+  }
+  return _client;
+}
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -15,5 +21,3 @@ export function Providers({ children }: { children: React.ReactNode }) {
     </ThirdwebProvider>
   );
 }
-
-export { client };

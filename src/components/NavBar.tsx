@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ConnectButton } from "thirdweb/react";
 import { base } from "thirdweb/chains";
-import { client } from "./Providers";
+import { getClient } from "./Providers";
 import {  Menu, X } from "lucide-react";
 import { useState } from "react";
 
@@ -46,7 +46,7 @@ export function NavBar() {
         <div className="flex items-center gap-2">
           <div className="hidden sm:block">
             <ConnectButton
-              client={client}
+              client={getClient()}
               chain={base}
               connectButton={{
                 label: "Connect",
@@ -85,7 +85,7 @@ export function NavBar() {
             ))}
             <div className="mt-2 pt-2 border-t border-[var(--border)]">
               <ConnectButton
-                client={client}
+                client={getClient()}
                 chain={base}
                 connectButton={{
                   label: "Connect Wallet",
